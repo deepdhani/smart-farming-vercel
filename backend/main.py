@@ -1,12 +1,7 @@
-# main.py — Vercel serverless FastAPI backend
-
+# main.py — Vercel serverless FastAPI
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from mangum import Mangum
 import os
-
-from config.database import connect_db_sync
-from routes import auth, weather, crops, disease, soil, irrigation, market, alerts
 
 app = FastAPI(title="Smart Farming Assistant API", version="1.0.0")
 
@@ -18,7 +13,26 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# API routes
+# Connect DB on first request (serverless — no lifespan)
+_db_connected = False
+
+async def ensure_db():
+    global _db_connected
+    if not _db_connected:
+        from config.database import connect_db
+        await connect_db()
+        _db_connected = True
+
+from fastapi import Request
+
+@app.middleware("http")
+async def db_middleware(request: Request, call_next):
+    await ensure_db()
+    return await call_next(request)
+
+# Routes
+from routes import auth, weather, crops, disease, soil, irrigation, market, alerts
+
 app.include_router(auth.router,       prefix="/api/auth",           tags=["Auth"])
 app.include_router(weather.router,    prefix="/api/weather",        tags=["Weather"])
 app.include_router(crops.router,      prefix="/api/crop-recommend", tags=["Crops"])
@@ -32,9 +46,6 @@ app.include_router(alerts.router,     prefix="/api/alerts",         tags=["Alert
 async def health():
     return {"status": "healthy"}
 
-@app.on_event("startup")
-async def startup():
-    await connect_db_sync()
-
-# Vercel handler
-handler = Mangum(app)
+@app.get("/api")
+async def root():
+    return {"message": "Smart Farming API running"}
