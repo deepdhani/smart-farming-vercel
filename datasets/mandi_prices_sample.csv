@@ -1,0 +1,18 @@
+crop,price_inr_per_quintal,market,district,date,trend
+potato,1200,Dehradun APMC,Dehradun,2024-11-01,up
+potato,1150,Haridwar Mandi,Haridwar,2024-11-01,up
+apple,6500,Delhi APMC,Dehradun,2024-11-01,up
+apple,6200,Chandigarh Mandi,Dehradun,2024-11-01,stable
+rajma,8000,Haridwar Mandi,Haridwar,2024-11-01,stable
+rajma,7800,Kashipur Mandi,Udham Singh Nagar,2024-11-01,stable
+pea,2200,Roorkee Mandi,Haridwar,2024-11-01,down
+pea,2100,Dehradun APMC,Dehradun,2024-11-01,down
+garlic,9500,Kashipur Mandi,Udham Singh Nagar,2024-11-01,up
+garlic,9200,Delhi APMC,Dehradun,2024-11-01,up
+tomato,900,Dehradun APMC,Dehradun,2024-11-01,down
+tomato,850,Roorkee Mandi,Haridwar,2024-11-01,down
+barley,1800,Haridwar Mandi,Haridwar,2024-11-01,stable
+buckwheat,3200,Chamoli Mandi,Chamoli,2024-11-01,up
+wheat,2100,Haridwar Mandi,Haridwar,2024-11-01,stable
+ginger,12000,Dehradun APMC,Dehradun,2024-11-01,up
+turmeric,8500,Kashipur Mandi,Udham Singh Nagar,2024-11-01,stable
